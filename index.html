@@ -33,10 +33,10 @@
 					ak = hentaigana[i][0];
 					break;
 				case 1:
-					ak = hentaigana[i][1].replace("ﾍ", "&\\*").replace("ﾝ", ";");
+					ak = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&\\*").replace("ﾝ", ";");
 					break;
 				case 2:
-					ak = hentaigana[i][1];
+					ak = hentaigana[i][document.form1.hentaigana.value];
 					break;
 				}
 				var bk;
@@ -45,10 +45,10 @@
 					bk = hentaigana[i][0];
 					break;
 				case 1:
-					bk = hentaigana[i][1].replace("ﾍ", "&*").replace("ﾝ", ";");
+					bk = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&*").replace("ﾝ", ";");
 					break;
 				case 2:
-					bk = hentaigana[i][1];
+					bk = hentaigana[i][document.form1.hentaigana.value];
 					break;
 				}
 				s = s.replace(new RegExp(ak, "g"), bk);
@@ -90,6 +90,11 @@
 			「𛀁、𛀆」の 扱い<br>
 			<label><input type="radio" name="ye" value="0" checked>「ye、yi」として 扱う</label><br>
 			<label><input type="radio" name="ye" value="1">「え、い」の 変体仮名として 扱う</label>
+		</p>
+		<p>
+			変体仮名の 代用表記<br>
+			<label><input type="radio" name="hentaigana" value="1" checked>現代の 仮名</label><br>
+			<label><input type="radio" name="hentaigana" value="2">元の 漢字</label>
 		</p>
 	</form>
 </body>
