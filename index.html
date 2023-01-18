@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>代用表記の相互変換</title>
+	<style>
+		@font-face {
+			font-family: "myFont";
+			src: url("mkanaplus-regular.woff")  format('woff');
+		}
+		textarea {
+			font-size: 20pt;
+			font-family: "myFont";
+		}
+	</style>
+	<script src="newkana.js"></script>
+	<script src="hentaigana.js"></script>
+	<script>
+		function convert(a, b) {
+			var s = document.form1.textarea1.value;
+			for (var i = 0; i < newkana.length; i++) {
+				if (document.form1.ye.value == 1) {
+					if (newkana[i][a] == "𛀁" || newkana[i][a] == "𛀆") continue;
+				}
+				var ak = newkana[i][a].replace(".", "\\.").replace("^", "\\^").replace("*", "\\*");
+				s = s.replace(new RegExp(ak, "g"), newkana[i][b]);
+			}
+
+			for (var i = 0; i < hentaigana.length; i++) {
+				var ak;
+				switch (a) {
+				case 0:
+					ak = hentaigana[i][0];
+					break;
+				case 1:
+					ak = hentaigana[i][1].replace("ﾍ", "&\\*").replace("ﾝ", ";");
+					break;
+				case 2:
+					ak = hentaigana[i][1];
+					break;
+				}
+				var bk;
+				switch (b) {
+				case 0:
+					bk = hentaigana[i][0];
+					break;
+				case 1:
+					bk = hentaigana[i][1].replace("ﾍ", "&*").replace("ﾝ", ";");
+					break;
+				case 2:
+					bk = hentaigana[i][1];
+					break;
+				}
+				s = s.replace(new RegExp(ak, "g"), bk);
+			}
+
+			document.form1.textarea1.value = s;
+		}
+	</script>
+</head>
+<body>
+	Mkana+で使える，本来の表記、代用表記を相互変換します。入力内容は外部に送信されません。<br>
+	Webフォントを使っているので，Mkana+のインストールは不要です。<br>
+	<form name="form1">
+		<textarea cols="80" rows="18" name="textarea1">あいうえおかがきぎくぐけげこごさざしじすずせぜそぞただちぢつづてでとどなにぬねの
+はばぱひびぴふぶぷへべぺほぼぽまみむめもやゆよらりるれろわゐゑをんゔ
+アイウエオカガキギクグケゲコゴサザシジスズセゼソゾタダチヂツヅテデトドナニヌネノ
+ハバパヒビピフブプヘベペホボポマミムメモヤユヨラリルレロワヰヱヲンヴ
+𛀀𛀁𛀄𛀆𛀕𛀙𛀬𛀸𛀿𛁈𛁋𛁕𛁛𛁟𛁻𛂁𛂦𛂱𛂶𛃅𛃛𛃭𛄚𛄟𛄠𛄡𛄢𛀙゙𛀬゙𛀸゙𛀿゙𛁈゙𛁋゙𛁕゙𛁛゙𛁟゙𛁻゙𛂦゙𛂱゙𛂶゙𛂦゚𛂱゚𛂶゚
+゠゛゜ゝゞ・ーヽヾ
+
+
+
+　
+
+ヷヸヹヺ　
+
+　
+　
+ぁぃぅぇぉゕゖっ𛅄ゃゅ󷰹ょゎ𛅐𛅑𛅒𛅓
+ァィゥェォヵヶッㇸャュ󷰼ョヮ𛅤𛅥𛅦𛅧
+ゟヿ𪜈𬻿𬼀𬼂󷲰󷲲󷲳󷲴󷲵</textarea><br>
+		<input type="button" value="本来→半角" onclick="convert(0, 2)">
+		<input type="button" value="本来→参照" onclick="convert(0, 1)"><br>
+		<input type="button" value="半角→本来" onclick="convert(2, 0)">
+		<input type="button" value="参照→本来" onclick="convert(1, 0)"><br>
+		<input type="button" value="半角→参照" onclick="convert(2, 1)">
+		<input type="button" value="参照→半角" onclick="convert(1, 2)"><br>
+		<p>
+			「𛀁、𛀆」の扱い<br>
+			<label><input type="radio" name="ye" value="0" checked>「ye、yi」として扱う</label><br>
+			<label><input type="radio" name="ye" value="1">「え、い」の変体仮名として扱う</label>
+		</p>
+	</form>
+</body>
+</html>
