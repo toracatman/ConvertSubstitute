@@ -33,7 +33,7 @@
 					ak = hentaigana[i][0];
 					break;
 				case 1:
-					ak = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&\\*").replace("ﾝ", ";");
+					ak = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&\\*").replace("ﾝ", ";").replace("゙", "ﾞ");
 					break;
 				case 2:
 					ak = hentaigana[i][document.form1.hentaigana.value];
@@ -45,7 +45,7 @@
 					bk = hentaigana[i][0];
 					break;
 				case 1:
-					bk = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&*").replace("ﾝ", ";");
+					bk = hentaigana[i][document.form1.hentaigana.value].replace("ﾍ", "&*").replace("ﾝ", ";").replace("゙", "ﾞ");
 					break;
 				case 2:
 					bk = hentaigana[i][document.form1.hentaigana.value];
